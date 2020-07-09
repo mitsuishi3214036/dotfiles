@@ -28,8 +28,7 @@ set autoindent
 set smartindent
 set shiftwidth=4
 
-set background=dark
-colorscheme solarized
+colorscheme iceberg
 
 "----------------------------------------------------------
 " edit

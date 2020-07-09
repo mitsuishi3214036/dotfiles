@@ -28,7 +28,8 @@ set autoindent
 set smartindent
 set shiftwidth=4
 
-colorscheme iceberg
+set background=dark
+colorscheme solarized
 
 "----------------------------------------------------------
 " edit
@@ -82,4 +83,9 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "----------------------------------------------------------
 " plugins
 "----------------------------------------------------------
-
+call plug#begin()
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+call plug#end()

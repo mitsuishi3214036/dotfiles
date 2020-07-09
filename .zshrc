@@ -1,5 +1,6 @@
 
 ### Environment settings
+PROMPT=$'%n@%m\n%~ %# '
 # LANGUAGE must be set by en_US
 export LANGUAGE="en_US.UTF-8"
 # Enable coloring
@@ -64,6 +65,11 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
+
+### tmux
+if [[ ! -n $TMUX ]]; then
+  tmux -2 new-session
+fi
 
 
 ### Added by Zinit's installer

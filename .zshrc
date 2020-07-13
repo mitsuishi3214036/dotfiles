@@ -13,7 +13,8 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 # Settings for Ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-# Cask
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$(go env GOPATH)/bin
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # History file
 export HISTFILE=~/.zsh_history

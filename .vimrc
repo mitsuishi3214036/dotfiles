@@ -28,8 +28,6 @@ set autoindent
 set smartindent
 set shiftwidth=4
 
-colorscheme iceberg
-
 "----------------------------------------------------------
 " edit
 "----------------------------------------------------------
@@ -82,9 +80,18 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 "----------------------------------------------------------
 " plugins
 "----------------------------------------------------------
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
+Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ }
 call plug#end()
+
+colorscheme iceberg

@@ -98,8 +98,9 @@ zinit light-mode for \
 # Load some plugins
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
-zinit load zdharma/history-search-multi-word
 
 ### iterm shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+### fzf settings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

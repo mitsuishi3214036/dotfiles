@@ -1,6 +1,6 @@
 
 ### Environment settings
-PROMPT=$'%n@%m\n%~ %# '
+PROMPT=$'%n@%m %~\n%# '
 # LANGUAGE must be set by en_US
 export LANGUAGE="en_US.UTF-8"
 export LANG="${LANGUAGE}"
@@ -13,11 +13,11 @@ export EDITOR=vim
 # Settings for Java
 export JAVA_HOME=$(/usr/libexec/java_home)
 # rt JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 # Settings for Ruby
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$(go env GOPATH)/bin
+eval "$(anyenv init -)"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # History file
 export HISTFILE=~/.zsh_history
@@ -46,8 +46,6 @@ bindkey -M viins '^D'  delete-char-or-list
 
 
 ### Alias settings
-alias vscode="open -a Visual\ Studio\ Code"
-alias safari="open -a Safari"
 
 
 ### Option settings

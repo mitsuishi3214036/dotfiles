@@ -91,13 +91,15 @@ Plug 'cocopon/iceberg.vim'
 Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
 Plug 'dense-analysis/ale'
 call plug#end()
 
-colorscheme iceberg
+colorscheme iceberg 
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
+
+
 " エラー行に表示するマーク
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'

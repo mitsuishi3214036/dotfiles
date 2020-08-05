@@ -1,34 +1,35 @@
 
 ### Environment settings
 PROMPT=$'%n@%m %~\n%# '
-# LANGUAGE must be set by en_US
+# Language
 export LANGUAGE="en_US.UTF-8"
 export LANG="${LANGUAGE}"
 export LC_ALL="${LANGUAGE}"
 export LC_CTYPE="${LANGUAGE}"
-# Enable coloring
+# Coloring
 export CLICOLOR=1
 # Editor
 export EDITOR=vim
+# Settings for anyenv
+eval "$(anyenv init -)"
 # Settings for Java
 export JAVA_HOME=$(/usr/libexec/java_home)
-# rt JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-# Settings for Ruby
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-export GOPATH=$(go env GOPATH)
-export PATH=$PATH:$(go env GOPATH)/bin
-eval "$(anyenv init -)"
+# Settings for Go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+# Settings for Homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 # History file
 export HISTFILE=~/.zsh_history
-# History size in memory
+# History size
 export HISTSIZE=10000
 # The number of histsize
 export SAVEHIST=1000000
 
 
 ### Keybind settings
-# Vim-like keybind as default
+# Vim-like keybind
 bindkey -v
 # Add emacs-like keybind to viins mode
 bindkey -M viins '^F'  forward-char
@@ -43,6 +44,7 @@ bindkey -M viins '^H'  backward-delete-char
 bindkey -M viins '^?'  backward-delete-char
 bindkey -M viins '^G'  send-break
 bindkey -M viins '^D'  delete-char-or-list
+inoremap <silent> jj <ESC>
 
 
 ### Alias settings

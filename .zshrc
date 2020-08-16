@@ -44,7 +44,6 @@ bindkey -M viins '^H'  backward-delete-char
 bindkey -M viins '^?'  backward-delete-char
 bindkey -M viins '^G'  send-break
 bindkey -M viins '^D'  delete-char-or-list
-inoremap <silent> jj <ESC>
 
 
 ### Alias settings

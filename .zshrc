@@ -12,6 +12,8 @@ export CLICOLOR=1
 export EDITOR=vim
 # Settings for anyenv
 eval "$(anyenv init -)"
+# Settings for clangd
+export PATH="/usr/local/opt/llvm/bin:$PATH"
 # Settings for Java
 export JAVA_HOME=$(/usr/libexec/java_home)
 # Settings for Go

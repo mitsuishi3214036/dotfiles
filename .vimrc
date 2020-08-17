@@ -6,7 +6,7 @@ scriptencoding utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-boms,utf-8,euc-jp,cp93
 set ambiwidth=double
-
+set t_Co=256
 set nocompatible
 
 "----------------------------------------------------------
@@ -27,6 +27,12 @@ set softtabstop=4
 set autoindent
 set smartindent
 set shiftwidth=4
+
+if has('vim_starting')
+    let &t_SI .= "\e[6 q"
+    let &t_EI .= "\e[2 q"
+    let &t_SR .= "\e[4 q"
+endif
 
 "----------------------------------------------------------
 " edit
@@ -77,7 +83,6 @@ set hlsearch
 set wrapscan
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-
 "----------------------------------------------------------
 " plugins
 "----------------------------------------------------------
@@ -88,38 +93,72 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'cocopon/iceberg.vim'
-Plug 'nanotech/jellybeans.vim'
+Plug 'tomasr/molokai'
 Plug 'altercation/vim-colors-solarized'
-Plug 'itchyny/lightline.vim'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'dense-analysis/ale'
+Plug 'nanotech/jellybeans.vim'
+Plug 'sheerun/vim-wombat-scheme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'jmcantrell/vim-virtualenv'
 call plug#end()
 
-let g:solarized_termcolors=256
-set background=dark
 colorscheme jellybeans
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ }
+
+" lsp settings
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd', '-background-index']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_virtual_text_enabled = 1
+let g:lsp_signs_error = {'text':'×'}
+let g:lsp_signs_warning = {'text': '⚠︎'}
+let g:lsp_signs_information = {'text': 'i'}
+let g:lsp_signs_hint = {'text': '?'}
+
+"asyncomplete settings
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 
 
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-let g:ale_linters = {
-\   'python': ['pylint'],
-\}
-nmap [ale] <Nop>
-map <C-k> [ale]
-nmap <silent> [ale]<C-P> <Plug>(ale_previous)
-nmap <silent> [ale]<C-N> <Plug>(ale_next)

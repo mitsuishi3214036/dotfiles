@@ -1,4 +1,4 @@
-"----------------------------------------------------------
+"---------------------------------------------------------
 " basic
 "----------------------------------------------------------
 set encoding=utf-8
@@ -93,19 +93,31 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'tomasr/molokai'
-Plug 'altercation/vim-colors-solarized'
-Plug 'nanotech/jellybeans.vim'
-Plug 'sheerun/vim-wombat-scheme'
+Plug 'cocopon/iceberg.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
-colorscheme jellybeans
+set background=dark
+colorscheme iceberg
+
+let g:airline_theme = 'iceberg'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
+let g:airline_section_c = '%t'
+let g:airline_section_x = '%{&filetype}'
+let g:airline_section_z = '%3l:%2v %{airline#extensions#lsp#get_warning()} %{airline#extensions#lsp#get_error()}'
+let g:airline#extensions#lsp#error_symbol = ' '
+let g:airline#extensions#lsp#warning_symbol = ' '
+nmap <C-p> <Plug>AirlineSelectPrevTab
+nmap <C-n> <Plug>AirlineSelectNextTab
 
 " lsp settings
 if executable('clangd')
@@ -151,8 +163,8 @@ let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_virtual_text_enabled = 1
-let g:lsp_signs_error = {'text':'×'}
-let g:lsp_signs_warning = {'text': '⚠︎'}
+let g:lsp_signs_error = {'text':''}
+let g:lsp_signs_warning = {'text': ''}
 let g:lsp_signs_information = {'text': 'i'}
 let g:lsp_signs_hint = {'text': '?'}
 

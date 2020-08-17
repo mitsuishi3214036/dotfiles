@@ -160,7 +160,6 @@ augroup lsp_install
 augroup END
 
 let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_virtual_text_enabled = 1
 let g:lsp_signs_error = {'text':''}

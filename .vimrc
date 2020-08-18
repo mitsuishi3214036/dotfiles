@@ -102,6 +102,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'ryanoasis/vim-devicons'
+Plug '/usr/local/opt/fzf'
 call plug#end()
 
 set background=dark
@@ -164,8 +165,8 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_virtual_text_enabled = 1
 let g:lsp_signs_error = {'text':''}
 let g:lsp_signs_warning = {'text': ''}
-let g:lsp_signs_information = {'text': 'i'}
-let g:lsp_signs_hint = {'text': '?'}
+let g:lsp_signs_information = {'text': ''}
+let g:lsp_signs_hint = {'text': ''}
 
 "asyncomplete settings
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"

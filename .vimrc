@@ -20,6 +20,7 @@ set showcmd
 set ruler
 set showmatch
 syntax enable
+set cursorline
 
 set expandtab
 set tabstop=4

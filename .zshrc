@@ -16,9 +16,6 @@ eval "$(anyenv init -)"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 # Settings for Java
 export JAVA_HOME=$(/usr/libexec/java_home)
-# Settings for Go
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
 # Settings for Homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"

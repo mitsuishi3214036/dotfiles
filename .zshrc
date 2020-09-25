@@ -15,7 +15,7 @@ eval "$(anyenv init -)"
 # Settings for clangd
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 # Settings for Java
-export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=$(/usr/libexec/java_home)
 # Settings for Homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
@@ -97,6 +97,8 @@ zinit light-mode for \
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit load zsh-users/zsh-history-substring-search
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -122,12 +124,4 @@ function _pip_completion {
              PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
 }
 compctl -K _pip_completion pip
-
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
 

@@ -15,7 +15,7 @@ eval "$(anyenv init -)"
 # Settings for clangd
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 # Settings for Java
-# export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=`/usr/libexec/java_home -v 14`
 # Settings for Homebrew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"

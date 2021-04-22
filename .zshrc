@@ -1,6 +1,4 @@
-
-### Environment settings
-PROMPT=$'%n@%m %~\n%# '
+### Environment
 # Language
 export LANGUAGE="en_US.UTF-8"
 export LANG="${LANGUAGE}"
@@ -10,15 +8,6 @@ export LC_CTYPE="${LANGUAGE}"
 export CLICOLOR=1
 # Editor
 export EDITOR=vim
-# Settings for anyenv
-eval "$(anyenv init -)"
-# Settings for clangd
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-# Settings for Java
-export JAVA_HOME=`/usr/libexec/java_home -v 14`
-# Settings for Homebrew
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 # History file
 export HISTFILE=~/.zsh_history
 # History size
@@ -26,8 +15,21 @@ export HISTSIZE=10000
 # The number of histsize
 export SAVEHIST=1000000
 
+# Settings for Homebrew
+export PATH="/usr/local/sbin:$PATH"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+# Settings for JAVA
+JAVA_HOME=`/usr/libexec/java_home -v xx`
+# Settings for nodebrew
+export NODEBREW_ROOT="/usr/local/var/nodebrew"
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
+# Settings for pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 
-### Keybind settings
+
+### Keybind
 # Vim-like keybind
 bindkey -v
 # Add emacs-like keybind to viins mode
@@ -46,12 +48,13 @@ bindkey -M viins '^D'  delete-char-or-list
 
 
 ### Alias settings
+alias vim="nvim"
 
 
 ### Option settings
 
 
-### Completion settings
+### Completion
 autoload -U compinit
 compinit
 zstyle ':completion::complete:*' use-cache true
@@ -68,6 +71,8 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 
+
+### zinit
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -91,14 +96,16 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-
-### zinit settings
-# Load some plugins
+# plugins
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 zinit load zsh-users/zsh-history-substring-search
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+PURE_PROMPT_SYMBOL='#'
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -125,3 +132,7 @@ function _pip_completion {
 }
 compctl -K _pip_completion pip
 
+# pyenv conpletion
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi

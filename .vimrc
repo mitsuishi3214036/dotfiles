@@ -94,7 +94,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'cocopon/iceberg.vim'
+Plug 'tomasr/molokai'
+" Plug 'cocopon/iceberg.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
@@ -107,17 +108,17 @@ Plug '/usr/local/opt/fzf'
 call plug#end()
 
 set background=dark
-colorscheme iceberg
+colorscheme molokai
 
-let g:airline_theme = 'iceberg'
+let g:airline_theme = 'molokai'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
 let g:airline_section_c = '%t'
 let g:airline_section_x = '%{&filetype}'
 let g:airline_section_z = '%3l:%2v %{airline#extensions#lsp#get_warning()} %{airline#extensions#lsp#get_error()}'
-let g:airline#extensions#lsp#error_symbol = ' '
-let g:airline#extensions#lsp#warning_symbol = ' '
+let g:airline#extensions#lsp#error_symbol = ''
+let g:airline#extensions#lsp#warning_symbol = ''
 nmap <C-p> <Plug>AirlineSelectPrevTab
 nmap <C-n> <Plug>AirlineSelectNextTab
 
@@ -161,6 +162,7 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+let g:lsp_diagnostics_enabled = 1
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_virtual_text_enabled = 1
